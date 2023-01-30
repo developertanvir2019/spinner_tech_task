@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 const Table = () => {
     const [allbilling, setAllBilling] = useState([])
     const [refresh, setrefresh] = useState(false)
+    const [page, setPage] = useState(0)
+    const [count, setCount] = useState(0)
+    const size = 10;
+    const totalPages = Math.ceil(count / size)
     const handleSubmit = e => {
         e.preventDefault()
         const billingInfo = {
@@ -35,13 +39,15 @@ const Table = () => {
 
     // get billing list
     useEffect(() => {
-        fetch("http://localhost:5000/billing-list")
+        const url = `http://localhost:5000/billing-list?page=${page}&size=${size}`;
+        fetch(url)
             .then(res => res.json())
             .then(data => {
-                setAllBilling(data)
+                setAllBilling(data?.allBillings);
+                setCount(data?.count)
             }
             )
-    }, [refresh])
+    }, [refresh, page, size])
 
     //delete the data
     const handleDelete = (id) => {
@@ -55,7 +61,6 @@ const Table = () => {
             })
             .catch(err => console.error(err.message));
     };
-
 
 
 
@@ -78,17 +83,18 @@ const Table = () => {
                     <input type="checkbox" id="my-modal-6" className="modal-toggle" />
                     <div className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
+                            <div className="modal-action">
+                                <label htmlFor="my-modal-6" className="btn" >X</label>
+                            </div>
                             <h3 className="font-bold text-lg text-info py-4">Fill the form for Billing</h3>
                             <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-4'>
                                 <input required name='name' type="text" placeholder="Enter your full name" className="input input-bordered w-full " />
                                 <input required name='email' type="email" placeholder="Enter your Email address" className="input input-bordered w-full " />
                                 <input required name='phone' type="text" placeholder="Enter your Phone number" className="input input-bordered w-full " />
-                                <input required name="amount" type="text" placeholder="payable amount" className="input input-bordered w-full" />
+                                <input required name="amount" type="number" placeholder="payable amount" className="input input-bordered w-full" />
 
-                                <div className="modal-action">
-                                    <input className='btn btn-info w-full ' type="submit" value='Submit' />
-                                    <label htmlFor="my-modal-6" className="btn" >X</label>
-                                </div>
+                                <input className='btn btn-info w-full ' type="submit" value='Submit' />
+
                             </form>
 
                         </div>
@@ -132,6 +138,12 @@ const Table = () => {
 
                         </tbody>
                     </table>
+                    <div className="pagination py-5">
+                        <p className='text-xl py-2'>Current page {page + 1}</p>
+                        {
+                            [...Array(totalPages).keys()].map(number => <button onClick={() => setPage(number)} className='text-white btn-info btn-xs mx-2' key={number}>{number + 1}</button>)
+                        }
+                    </div>
                 </div>
 
             </section>

@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Table></Table>
+                element: <Table></Table>,
             },
             {
                 path: '/edit/:id',

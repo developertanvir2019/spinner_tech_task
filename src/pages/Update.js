@@ -43,7 +43,7 @@ const Update = () => {
                         <input required defaultValue={data?.name} name='name' type="text" placeholder="Enter your full name" className="input input-bordered w-full " />
                         <input required defaultValue={data?.email} name='email' type="email" placeholder="Enter your Email address" className="input input-bordered w-full " />
                         <input required defaultValue={data?.phone} name='phone' type="text" placeholder="Enter your Phone number" className="input input-bordered w-full " />
-                        <input required defaultValue={data?.amount} name="amount" type="text" placeholder="payable amount" className="input input-bordered w-full" />
+                        <input required defaultValue={data?.amount} name="amount" type="number" placeholder="payable amount" className="input input-bordered w-full" />
                         <input className='btn btn-info w-full ' type="submit" value='Update' />
                     </form>
                 </div>
