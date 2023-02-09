@@ -8,7 +8,7 @@ const Update = () => {
     const { id } = useParams();
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`http://localhost:5000/edit/${id}`)
+        fetch(`https://power-hack-server-ten.vercel.app/edit/${id}`)
             .then(res => res.json())
             .then(data => setData(data[0]))
     }, [id])
@@ -20,7 +20,7 @@ const Update = () => {
             phone: e.target.phone.value,
             amount: e.target.amount.value,
         }
-        fetch(`http://localhost:5000/update-billing/${id}`, {
+        fetch(`https://power-hack-server-ten.vercel.app/update-billing/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -5,7 +5,7 @@ const Navbar = () => {
     const [bill, setBill] = useState([])
     const sum = bill?.reduce((total, obj) => total + parseInt(obj.amount), 0);
     useEffect(() => {
-        fetch('http://localhost:5000/billing-list')
+        fetch('https://power-hack-server-ten.vercel.app/billing-list')
             .then(res => res.json())
             .then(data => setBill(data?.allBillings))
     }, [])

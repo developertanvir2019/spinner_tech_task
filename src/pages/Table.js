@@ -19,7 +19,7 @@ const Table = () => {
             amount: e.target.amount.value,
         }
         e.target.reset();
-        fetch('http://localhost:5000/add-billing', {
+        fetch('https://power-hack-server-ten.vercel.app/add-billing', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -39,7 +39,7 @@ const Table = () => {
 
     // get billing list
     useEffect(() => {
-        const url = `http://localhost:5000/billing-list?page=${page}&size=${size}`;
+        const url = `https://power-hack-server-ten.vercel.app/billing-list?page=${page}&size=${size}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -51,7 +51,7 @@ const Table = () => {
 
     //delete the data
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/delete-billing/${id}`, {
+        fetch(`https://power-hack-server-ten.vercel.app/delete-billing/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

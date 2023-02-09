@@ -12,7 +12,7 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
         try {
-            const response = await fetch('http://localhost:5000/registration', {
+            const response = await fetch('https://power-hack-server-ten.vercel.app/registration', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
